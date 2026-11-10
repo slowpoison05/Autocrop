@@ -165,11 +165,13 @@ class MainActivity : ComponentActivity() {
 
     private fun processPages(uris: List<Uri>) {
         status.text = "Enhancing ${uris.size} page(s)…"
+        // Read UI state on the main thread before starting background work.
+        val selectedMode = filter.selectedItemPosition
         Thread {
             try {
                 val bitmaps = uris.mapNotNull { uri ->
                     contentResolver.openInputStream(uri)?.use { input ->
-                        BitmapFactory.decodeStream(input)?.let { enhance(it, filter.selectedItemPosition) }
+                        BitmapFactory.decodeStream(input)?.let { enhance(it, selectedMode) }
                     }
                 }
                 if (bitmaps.isEmpty()) throw IllegalStateException("Could not read scanned pages")
@@ -255,7 +257,9 @@ class MainActivity : ComponentActivity() {
                 put(MediaStore.MediaColumns.MIME_TYPE, "application/pdf")
                 put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_DOCUMENTS + "/AutoCrop")
             }
-            val uri = contentResolver.insert(MediaStore.Downloads.EXTERNAL_CONTENT_URI, values)
+            // PDFs are generic files, not downloads. The Downloads collection only
+            // permits the Download primary directory and rejects Documents.
+            val uri = contentResolver.insert(MediaStore.Files.getContentUri("external"), values)
                 ?: throw IllegalStateException("Could not create PDF file")
             contentResolver.openOutputStream(uri)?.use { document.writeTo(it) }
                 ?: throw IllegalStateException("Could not open PDF output")
