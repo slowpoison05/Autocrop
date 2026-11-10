@@ -89,15 +89,19 @@ ipcMain.handle('process-image', async (_event, options) => {
   }
 
   const scale = upscale ? 2 : 1;
-  const targetWidth = Math.min((ratio ? Math.round(Math.min(meta.width, meta.height * (ratio || 1))) : meta.width) * scale, 12000);
-  const targetHeight = Math.min(Math.round(targetWidth / (ratio || (meta.width / meta.height))), 12000);
+  let cropWidth = meta.width;
+  let cropHeight = meta.height;
+  if (ratio) {
+    if (meta.width / meta.height > ratio) cropWidth = Math.round(meta.height * ratio);
+    else cropHeight = Math.round(meta.width / ratio);
+  }
+  const targetWidth = Math.min(Math.round(cropWidth * scale), 12000);
+  const targetHeight = Math.min(Math.round(cropHeight * scale), 12000);
 
   pipeline = pipeline
-    .resize({
-      width: ratio ? undefined : targetWidth,
-      height: ratio ? undefined : targetHeight,
-      fit: 'inside',
-      withoutEnlargement: !upscale,
+    .resize(targetWidth, targetHeight, {
+      fit: 'cover',
+      position: sharp.strategy.attention,
       kernel: sharp.kernel.lanczos3
     })
     .normalize()
