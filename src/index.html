@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AutoCrop</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand"><div class="brand-mark">A</div><div><strong>AutoCrop</strong><small>PHOTO STUDIO</small></div></div>
+      <div class="side-label">WORKSPACE</div>
+      <button class="nav-item active"><span>▧</span> Photo editor</button>
+      <div class="privacy-card"><div class="privacy-icon">⌑</div><strong>Your photos stay yours</strong><p>Images are processed locally on this computer. Nothing is uploaded to a server.</p></div>
+      <div class="sidebar-footer">AUTO CROP · ENHANCE · EXPORT</div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar"><div><span class="eyebrow">IMAGE WORKFLOW</span><h1>Photo editor</h1></div><div class="local-pill"><i></i> LOCAL PROCESSING</div></header>
+      <section class="intro">
+        <div><h2>Make every photo<br><em>frame-worthy.</em></h2><p>Smart cropping and one-click quality enhancement, right on your desktop.</p></div>
+        <div class="intro-art"><div class="art-frame"><div class="sun"></div><div class="mountain m1"></div><div class="mountain m2"></div></div><span>01 / CROP + ENHANCE</span></div>
+      </section>
+
+      <section class="workspace">
+        <div class="section-head"><div><span class="eyebrow">01 — YOUR IMAGES</span><h3>Upload photos</h3></div><button id="addBtn" class="button secondary">＋ Add photos</button></div>
+        <div id="dropzone" class="dropzone"><div class="upload-icon">↑</div><strong>Drop your photos here</strong><p>or <button id="browseBtn" class="text-button">browse files</button> from your computer</p><small>JPG · PNG · WEBP · TIFF · AVIF</small></div>
+        <div id="fileList" class="file-list"></div>
+
+        <div class="controls">
+          <div class="control-block"><span class="eyebrow">02 — SMART CROP</span><label for="aspect">Crop format</label><select id="aspect"><option value="original">Keep original ratio</option><option value="square">Square · 1:1</option><option value="portrait">Portrait · 4:5</option><option value="story">Story · 9:16</option><option value="landscape">Landscape · 16:9</option><option value="photo">Photo · 3:2</option></select><small>Uses smart attention positioning to keep the main visual area in frame.</small></div>
+          <div class="control-block"><span class="eyebrow">03 — ENHANCEMENT</span><label>Quality settings</label><label class="check-row"><input id="upscale" type="checkbox"><span><b>2× upscale</b><small>Increase output dimensions (best for smaller images)</small></span></label><div class="quality-row"><span>Export quality</span><strong id="qualityValue">92%</strong></div><input id="quality" type="range" min="70" max="100" value="92"></div>
+        </div>
+
+        <div class="action-row"><div id="status" class="status">Ready when you are.</div><button id="processBtn" class="button primary" disabled>Enhance photos <span>→</span></button></div>
+      </section>
+
+      <section id="results" class="results hidden">
+        <div class="section-head"><div><span class="eyebrow">04 — RESULTS</span><h3>Ready to export</h3></div><button id="saveAllBtn" class="button primary">Save all photos ↓</button></div>
+        <div id="resultGrid" class="result-grid"></div>
+      </section>
+      <footer>AutoCrop Desktop <span>·</span> Your files never leave your device.</footer>
+    </main>
+  </div>
+  <script src="renderer.js"></script>
+</body>
+</html>
