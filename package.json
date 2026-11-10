@@ -18,10 +18,17 @@
   "build": {
     "appId": "in.autocrop.desktop",
     "productName": "AutoCrop",
-    "directories": { "output": "release" },
-    "files": ["src/**/*", "package.json"],
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "src/**/*",
+      "package.json"
+    ],
     "win": {
-      "target": ["nsis", "portable"],
+      "target": [
+        "nsis"
+      ],
       "artifactName": "AutoCrop-Setup-${version}.${ext}"
     },
     "nsis": {
