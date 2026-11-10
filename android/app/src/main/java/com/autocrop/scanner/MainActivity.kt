@@ -1,10 +1,8 @@
 package com.autocrop.scanner
 
 import android.app.Activity
-import android.app.AlertDialog
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.pdf.PdfDocument
@@ -23,7 +21,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts
-import com.google.android.gms.mlkit.documentscanner.GmsDocumentScanning
+import com.google.mlkit.vision.documentscanner.GmsDocumentScanning
 import com.google.android.gms.mlkit.documentscanner.GmsDocumentScannerOptions
 import com.google.android.gms.mlkit.documentscanner.GmsDocumentScanningResult
 import java.io.ByteArrayOutputStream
