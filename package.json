@@ -1,0 +1,32 @@
+{
+  "name": "autocrop-desktop",
+  "version": "1.0.0",
+  "description": "Private Windows desktop app for smart photo cropping and quality enhancement",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder --win",
+    "dist:portable": "electron-builder --win portable"
+  },
+  "dependencies": {
+    "sharp": "^0.34.3"
+  },
+  "devDependencies": {
+    "electron": "^37.2.6",
+    "electron-builder": "^26.0.12"
+  },
+  "build": {
+    "appId": "in.autocrop.desktop",
+    "productName": "AutoCrop",
+    "directories": { "output": "release" },
+    "files": ["src/**/*", "package.json"],
+    "win": {
+      "target": ["nsis", "portable"],
+      "artifactName": "AutoCrop-Setup-${version}.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
+  }
+}
