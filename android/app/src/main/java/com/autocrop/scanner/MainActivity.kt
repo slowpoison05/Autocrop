@@ -19,11 +19,12 @@ import android.widget.Spinner
 import android.widget.ArrayAdapter
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.ComponentActivity
 import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import com.google.mlkit.vision.documentscanner.GmsDocumentScanning
-import com.google.android.gms.mlkit.documentscanner.GmsDocumentScannerOptions
-import com.google.android.gms.mlkit.documentscanner.GmsDocumentScanningResult
+import com.google.mlkit.vision.documentscanner.GmsDocumentScannerOptions
+import com.google.mlkit.vision.documentscanner.GmsDocumentScanningResult
 import java.io.ByteArrayOutputStream
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -31,7 +32,7 @@ import java.util.Locale
 import kotlin.math.max
 import kotlin.math.min
 
-class MainActivity : Activity() {
+class MainActivity : ComponentActivity() {
     private lateinit var status: TextView
     private lateinit var filter: Spinner
 
